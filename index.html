@@ -2,12 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>JSON Parser View</title>
+    <meta
+      name="description"
+      content="Efficient JSON parsing and viewing tool for developers."
+    />
+    <meta
+      name="keywords"
+      content="JSON parser, JSON viewer, data extraction, developer tools"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root" class="min-h-screen w-full"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "JSON Parser View",
+        "description": "Efficient JSON parsing and viewing tool for developers.",
+        "url": "https://www.example.com",
+        "sameAs": [
+          "https://www.facebook.com/yourpage",
+          "https://twitter.com/yourpage",
+          "https://www.linkedin.com/in/yourpage"
+        ]
+      }
+    </script>
   </body>
 </html>
