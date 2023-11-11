@@ -1,4 +1,5 @@
-// import { TypeTag } from './TypeTag'
+import { isURL } from '../helpers/is-url'
+import { VARIABLE_TYPES } from '../types'
 
 type JsonProp = {
   key: string
@@ -17,17 +18,12 @@ export function JsonRenderView({ jsonArray, isCollapseOpen }: Props) {
       return (
         <details className="p-0.5" key={item.key} open={isCollapseOpen}>
           <summary className="cursor-pointer">
-            {/* <TypeTag
-              type={item.type}
-              value={item.key}
-              length={
-                item.type === 'array'
-                  ? item.value.length
-                  : Object.keys(item.value).length
-              }
-            /> */}
-
             <span className="font-mono text-slate-600">{item.key}</span>
+            <span className="font-mono text-slate-400 text-xs ml-1">
+              {item.type === VARIABLE_TYPES.array && `[${item.value.length}]`}
+              {item.type === VARIABLE_TYPES.object &&
+                `{${Object.keys(item.value).length}}`}
+            </span>
           </summary>
 
           <div className="ml-1 pl-4 border-l border-slate-100">
@@ -52,15 +48,14 @@ export function JsonRenderView({ jsonArray, isCollapseOpen }: Props) {
       <div className="my-1 h-5 flex" key={item.key}>
         <div className="flex">
           <span className="font-mono text-slate-600">{item.key}</span>
-          {/* <TypeTag type={item.type} /> */}
           <span className="mx-1 text-slate-400">:</span>
 
           {isBoolean && (
             <span
-              className={`font-mono ${
+              className={`font-mono italic ${
                 String(item.value) === 'true'
-                  ? 'text-green-600'
-                  : 'text-red-600'
+                  ? 'text-emerald-500'
+                  : 'text-red-500'
               }`}
             >
               {isBoolean ? String(item.value) : item.value}
@@ -68,10 +63,22 @@ export function JsonRenderView({ jsonArray, isCollapseOpen }: Props) {
           )}
 
           {isString && (
-            <span className="font-mono text-neutral-500">
-              <span className="font-mono text-neutral-300 select-none">"</span>
-              {item.value}
-              <span className="font-mono text-neutral-300 select-none">"</span>
+            <span>
+              <span className="font-mono text-neutral-400 select-none">"</span>
+              {isURL(item.value as string) ? (
+                <a
+                  href={item.value as string}
+                  rel="noopener noreferrer nofollow"
+                  target="_blank"
+                  className="font-mono text-stone-500 underline hover:text-blue-500"
+                >
+                  {item.value}
+                </a>
+              ) : (
+                <span className="font-mono text-stone-500">{item.value}</span>
+              )}
+
+              <span className="font-mono text-neutral-400 select-none">"</span>
             </span>
           )}
 
